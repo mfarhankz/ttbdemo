@@ -203,7 +203,15 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | AccordionBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | AccordionBlock
+    | FeatureGridBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -810,6 +818,25 @@ export interface AccordionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGridBlock".
+ */
+export interface FeatureGridBlock {
+  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  eyebrow?: string | null;
+  heading: string;
+  intro?: string | null;
+  items?:
+    | {
+        body: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1119,6 +1146,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         accordionBlock?: T | AccordionBlockSelect<T>;
+        featureGrid?: T | FeatureGridBlockSelect<T>;
       };
   meta?:
     | T
@@ -1237,6 +1265,24 @@ export interface AccordionBlockSelect<T extends boolean = true> {
     | {
         question?: T;
         answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGridBlock_select".
+ */
+export interface FeatureGridBlockSelect<T extends boolean = true> {
+  sectionSurface?: T;
+  eyebrow?: T;
+  heading?: T;
+  intro?: T;
+  items?:
+    | T
+    | {
+        body?: T;
         id?: T;
       };
   id?: T;
