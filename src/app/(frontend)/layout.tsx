@@ -5,6 +5,7 @@ import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import React from 'react'
 
+import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
 import { DemoRequestModal } from '@/components/DemoRequestModal'
 import { Providers } from '@/providers'
@@ -24,8 +25,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <Providers>
-          <Header />
-          {children}
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <div className="flex-1">{children}</div>
+            <Footer />
+          </div>
           <DemoRequestModal />
         </Providers>
       </body>

@@ -39,6 +39,23 @@ export const hero: Field = {
       required: true,
     },
     {
+      name: 'badgeText',
+      type: 'text',
+      admin: {
+        condition: (_, { type } = {}) => type === 'highImpact',
+      },
+      label: 'Badge Text',
+    },
+    {
+      name: 'badgeIcon',
+      type: 'upload',
+      admin: {
+        condition: (_, { type } = {}) => type === 'highImpact',
+      },
+      label: 'Badge Icon',
+      relationTo: 'media',
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({

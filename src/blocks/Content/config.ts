@@ -8,6 +8,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
+import { sectionSurfaceField } from '@/fields/sectionSurface'
 
 const columnFields: Field[] = [
   {
@@ -40,7 +41,7 @@ const columnFields: Field[] = [
       features: ({ rootFeatures }) => {
         return [
           ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ]
@@ -67,6 +68,7 @@ export const Content: Block = {
   slug: 'content',
   interfaceName: 'ContentBlock',
   fields: [
+    sectionSurfaceField,
     {
       name: 'columns',
       type: 'array',

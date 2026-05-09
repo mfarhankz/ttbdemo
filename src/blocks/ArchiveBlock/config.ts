@@ -1,5 +1,7 @@
 import type { Block } from 'payload'
 
+import { sectionSurfaceField } from '@/fields/sectionSurface'
+
 import {
   FixedToolbarFeature,
   HeadingFeature,
@@ -11,6 +13,7 @@ export const Archive: Block = {
   slug: 'archive',
   interfaceName: 'ArchiveBlock',
   fields: [
+    sectionSurfaceField,
     {
       name: 'introContent',
       type: 'richText',

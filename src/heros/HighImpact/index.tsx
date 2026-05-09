@@ -8,22 +8,50 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 
-export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
+export const HighImpactHero: React.FC<Page['hero']> = (props) => {
+  const { links, media, richText } = props
+  const badgeText = (props as Page['hero'] & { badgeText?: string | null })?.badgeText
+  const badgeIcon = (props as Page['hero'] & { badgeIcon?: unknown })?.badgeIcon
   const { setHeaderTheme } = useHeaderTheme()
 
   useEffect(() => {
     setHeaderTheme('dark')
   }, [setHeaderTheme])
 
+  const handlePointerMove: React.PointerEventHandler<HTMLElement> = (event) => {
+    const bounds = event.currentTarget.getBoundingClientRect()
+    const x = event.clientX - bounds.left
+    const y = event.clientY - bounds.top
+
+    event.currentTarget.style.setProperty('--mouse-x', `${x}px`)
+    event.currentTarget.style.setProperty('--mouse-y', `${y}px`)
+  }
+
   return (
     <section
-      className="relative overflow-hidden bg-linear-to-r from-[#1d1d72] via-[#202b87] to-[#0f7498] py-16 md:py-20"
+      className="proptech-background relative overflow-hidden py-36 md:py-[150px] mt-[65px]"
       data-theme="dark"
+      onPointerMove={handlePointerMove}
     >
       <div className="container">
         <div className="grid gap-10 md:grid-cols-2 md:items-center">
           <div className="text-white">
-            {richText && <RichText className="[&_p]:text-white/85" data={richText} enableGutter={false} />}
+            {badgeText ? (
+              <div className="mb-8 inline-flex items-center gap-3 rounded-md border border-white/25 bg-white/5 px-4 py-2">
+                {badgeIcon && typeof badgeIcon === 'object' ? (
+                  <Media
+                    className="h-6 w-6 shrink-0"
+                    imgClassName="h-full w-full object-contain"
+                    resource={badgeIcon as never}
+                  />
+                ) : null}
+                <span className="text-[22px] font-[300] text-white">{badgeText}</span>
+              </div>
+            ) : null}
+
+            {richText && (
+              <RichText className="[&_p]:text-white/85" data={richText} enableGutter={false} />
+            )}
 
             {Array.isArray(links) && links.length > 0 && (
               <ul className="mt-8 flex flex-wrap gap-3">
@@ -32,7 +60,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
                     <li key={i}>
                       <CMSLink
                         {...link}
-                        className="rounded-sm bg-white px-5 py-2.5 text-sm font-medium text-[#1d1d72] transition hover:bg-slate-100"
+                        className="rounded-sm bg-white px-8 py-8 text-lg font-medium text-[#16a1c3] transition hover:bg-slate-100"
                       />
                     </li>
                   )
@@ -41,8 +69,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
             )}
           </div>
 
-          <div className="rounded-md border border-cyan-200/30 bg-white/10 p-3 shadow-2xl backdrop-blur-sm">
-            <div className="h-[220px] rounded-sm bg-linear-to-br from-cyan-100 via-slate-100 to-blue-200 p-3 md:h-[260px]">
+          <div className="rounded-md border border-cyan-200/30 bg-white/10 p-1 shadow-2xl backdrop-blur-sm">
+            <div className="h-[350px] rounded-sm">
               <div className="relative h-full overflow-hidden rounded-sm border border-slate-300/80 bg-white">
                 {media && typeof media === 'object' ? (
                   <Media fill imgClassName="object-cover" priority resource={media} />

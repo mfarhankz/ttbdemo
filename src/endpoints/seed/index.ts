@@ -245,6 +245,19 @@ export const seed = async ({
     payload.updateGlobal({
       slug: 'footer',
       data: {
+        ctaEyebrow: 'Works on any device',
+        ctaHeadline:
+          'iPad, iPhone, Android, Mac, or PC — Title Toolbox goes where you work.',
+        ctaLink: {
+          type: 'custom',
+          url: '#',
+          label: 'Request a Demo',
+          appearance: 'default',
+          newTab: false,
+        },
+        ctaOpensDemoModal: true,
+        disclaimer:
+          'Disclaimer: Data coverage and availability vary by region. Not all data, reports, or features are available in every area.',
         navItems: [
           {
             link: {

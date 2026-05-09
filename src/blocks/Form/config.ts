@@ -1,5 +1,7 @@
 import type { Block } from 'payload'
 
+import { sectionSurfaceField } from '@/fields/sectionSurface'
+
 import {
   FixedToolbarFeature,
   HeadingFeature,
@@ -11,6 +13,7 @@ export const FormBlock: Block = {
   slug: 'formBlock',
   interfaceName: 'FormBlock',
   fields: [
+    sectionSurfaceField,
     {
       name: 'form',
       type: 'relationship',
