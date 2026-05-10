@@ -10,15 +10,19 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { PowerfulToolsBlock } from '@/blocks/PowerfulTools/Component'
+import { ProcessStepsBlock } from '@/blocks/ProcessSteps/Component'
 
 const blockComponents = {
   accordionBlock: AccordionBlock,
   archive: ArchiveBlock,
   featureGrid: FeatureGridBlock,
+  powerfulTools: PowerfulToolsBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  processSteps: ProcessStepsBlock,
 }
 
 export const RenderBlocks: React.FC<{

@@ -211,6 +211,8 @@ export interface Page {
     | FormBlock
     | AccordionBlock
     | FeatureGridBlock
+    | PowerfulToolsBlock
+    | ProcessStepsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -837,6 +839,46 @@ export interface FeatureGridBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PowerfulToolsBlock".
+ */
+export interface PowerfulToolsBlock {
+  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  eyebrow?: string | null;
+  heading: string;
+  cards?:
+    | {
+        icon: 'fileSearch' | 'folder' | 'shieldCheck' | 'barChart' | 'mapPin' | 'users';
+        badge?: string | null;
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'powerfulTools';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessStepsBlock".
+ */
+export interface ProcessStepsBlock {
+  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  eyebrow?: string | null;
+  heading: string;
+  intro?: string | null;
+  steps?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'processSteps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1147,6 +1189,8 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         accordionBlock?: T | AccordionBlockSelect<T>;
         featureGrid?: T | FeatureGridBlockSelect<T>;
+        powerfulTools?: T | PowerfulToolsBlockSelect<T>;
+        processSteps?: T | ProcessStepsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1283,6 +1327,44 @@ export interface FeatureGridBlockSelect<T extends boolean = true> {
     | T
     | {
         body?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PowerfulToolsBlock_select".
+ */
+export interface PowerfulToolsBlockSelect<T extends boolean = true> {
+  sectionSurface?: T;
+  eyebrow?: T;
+  heading?: T;
+  cards?:
+    | T
+    | {
+        icon?: T;
+        badge?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessStepsBlock_select".
+ */
+export interface ProcessStepsBlockSelect<T extends boolean = true> {
+  sectionSurface?: T;
+  eyebrow?: T;
+  heading?: T;
+  intro?: T;
+  steps?:
+    | T
+    | {
+        label?: T;
         id?: T;
       };
   id?: T;
