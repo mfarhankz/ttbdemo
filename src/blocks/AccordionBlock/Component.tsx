@@ -23,9 +23,7 @@ export const AccordionBlock: React.FC<AccordionBlockProps> = (props) => {
             {heading}
           </h1>
           {intro ? (
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-[#5a6b7d] md:text-[15px] md:leading-7">
-              {intro}
-            </p>
+            <p className="mt-4 max-w-md text-lg leading-relaxed text-[#525475]">{intro}</p>
           ) : null}
         </div>
 
@@ -60,7 +58,7 @@ export const AccordionBlock: React.FC<AccordionBlockProps> = (props) => {
                     )}
                   >
                     <div className="min-h-0 overflow-hidden">
-                      <p className="pb-4 pr-2 text-sm leading-relaxed text-[#5a6b7d] md:pb-5 md:text-[15px] md:leading-7">
+                      <p className="pb-4 pr-2 text-lg leading-relaxed text-[#525475] md:pb-5 md:leading-7">
                         {row.answer}
                       </p>
                     </div>

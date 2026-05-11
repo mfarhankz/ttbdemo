@@ -1,6 +1,6 @@
 import type { Block } from 'payload'
 
-import { sectionSurfaceField } from '@/fields/sectionSurface'
+import { sectionFields } from '@/fields/sectionSurface'
 
 export const AccordionBlock: Block = {
   slug: 'accordionBlock',
@@ -10,7 +10,7 @@ export const AccordionBlock: Block = {
     plural: 'FAQ accordions',
   },
   fields: [
-    sectionSurfaceField,
+    ...sectionFields,
     {
       name: 'eyebrow',
       type: 'text',

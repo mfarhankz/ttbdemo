@@ -1,6 +1,6 @@
 import type { Block } from 'payload'
 
-import { sectionSurfaceField } from '@/fields/sectionSurface'
+import { sectionFields } from '@/fields/sectionSurface'
 
 import {
   FixedToolbarFeature,
@@ -13,7 +13,7 @@ export const Archive: Block = {
   slug: 'archive',
   interfaceName: 'ArchiveBlock',
   fields: [
-    sectionSurfaceField,
+    ...sectionFields,
     {
       name: 'introContent',
       type: 'richText',

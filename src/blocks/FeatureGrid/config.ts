@@ -1,6 +1,6 @@
 import type { Block } from 'payload'
 
-import { sectionSurfaceField } from '@/fields/sectionSurface'
+import { sectionFields } from '@/fields/sectionSurface'
 
 export const FeatureGrid: Block = {
   slug: 'featureGrid',
@@ -10,7 +10,7 @@ export const FeatureGrid: Block = {
     plural: 'Feature grids',
   },
   fields: [
-    sectionSurfaceField,
+    ...sectionFields,
     {
       name: 'eyebrow',
       type: 'text',

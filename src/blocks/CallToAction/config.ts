@@ -8,13 +8,13 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { linkGroup } from '../../fields/linkGroup'
-import { sectionSurfaceField } from '@/fields/sectionSurface'
+import { sectionFields } from '@/fields/sectionSurface'
 
 export const CallToAction: Block = {
   slug: 'cta',
   interfaceName: 'CallToActionBlock',
   fields: [
-    sectionSurfaceField,
+    ...sectionFields,
     {
       name: 'richText',
       type: 'richText',

@@ -457,6 +457,10 @@ export interface User {
  */
 export interface CallToActionBlock {
   sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  /**
+   * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
+   */
+  sectionId?: string | null;
   richText?: {
     root: {
       type: string;
@@ -506,6 +510,10 @@ export interface CallToActionBlock {
  */
 export interface ContentBlock {
   sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  /**
+   * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
+   */
+  sectionId?: string | null;
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
@@ -557,6 +565,10 @@ export interface ContentBlock {
  */
 export interface MediaBlock {
   sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  /**
+   * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
+   */
+  sectionId?: string | null;
   media: number | Media;
   id?: string | null;
   blockName?: string | null;
@@ -568,6 +580,10 @@ export interface MediaBlock {
  */
 export interface ArchiveBlock {
   sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  /**
+   * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
+   */
+  sectionId?: string | null;
   introContent?: {
     root: {
       type: string;
@@ -603,6 +619,10 @@ export interface ArchiveBlock {
  */
 export interface FormBlock {
   sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  /**
+   * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
+   */
+  sectionId?: string | null;
   form: number | Form;
   enableIntro?: boolean | null;
   introContent?: {
@@ -804,6 +824,10 @@ export interface Form {
  */
 export interface AccordionBlock {
   sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  /**
+   * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
+   */
+  sectionId?: string | null;
   eyebrow?: string | null;
   heading: string;
   intro?: string | null;
@@ -824,6 +848,10 @@ export interface AccordionBlock {
  */
 export interface FeatureGridBlock {
   sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  /**
+   * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
+   */
+  sectionId?: string | null;
   eyebrow?: string | null;
   heading: string;
   intro?: string | null;
@@ -843,6 +871,10 @@ export interface FeatureGridBlock {
  */
 export interface PowerfulToolsBlock {
   sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  /**
+   * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
+   */
+  sectionId?: string | null;
   eyebrow?: string | null;
   heading: string;
   cards?:
@@ -864,6 +896,10 @@ export interface PowerfulToolsBlock {
  */
 export interface ProcessStepsBlock {
   sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  /**
+   * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
+   */
+  sectionId?: string | null;
   eyebrow?: string | null;
   heading: string;
   intro?: string | null;
@@ -1212,6 +1248,7 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
+  sectionId?: T;
   richText?: T;
   links?:
     | T
@@ -1237,6 +1274,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  */
 export interface ContentBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
+  sectionId?: T;
   columns?:
     | T
     | {
@@ -1264,6 +1302,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
+  sectionId?: T;
   media?: T;
   id?: T;
   blockName?: T;
@@ -1274,6 +1313,7 @@ export interface MediaBlockSelect<T extends boolean = true> {
  */
 export interface ArchiveBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
+  sectionId?: T;
   introContent?: T;
   populateBy?: T;
   relationTo?: T;
@@ -1289,6 +1329,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
  */
 export interface FormBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
+  sectionId?: T;
   form?: T;
   enableIntro?: T;
   introContent?: T;
@@ -1301,6 +1342,7 @@ export interface FormBlockSelect<T extends boolean = true> {
  */
 export interface AccordionBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
+  sectionId?: T;
   eyebrow?: T;
   heading?: T;
   intro?: T;
@@ -1320,6 +1362,7 @@ export interface AccordionBlockSelect<T extends boolean = true> {
  */
 export interface FeatureGridBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
+  sectionId?: T;
   eyebrow?: T;
   heading?: T;
   intro?: T;
@@ -1338,6 +1381,7 @@ export interface FeatureGridBlockSelect<T extends boolean = true> {
  */
 export interface PowerfulToolsBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
+  sectionId?: T;
   eyebrow?: T;
   heading?: T;
   cards?:
@@ -1358,6 +1402,7 @@ export interface PowerfulToolsBlockSelect<T extends boolean = true> {
  */
 export interface ProcessStepsBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
+  sectionId?: T;
   eyebrow?: T;
   heading?: T;
   intro?: T;

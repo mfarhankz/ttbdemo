@@ -24,7 +24,7 @@ export const PowerfulToolsBlock: React.FC<PowerfulToolsBlockProps> = (props) => 
   const list = cards?.filter((row) => row?.title?.trim() && row?.description?.trim()) ?? []
 
   return (
-    <div className="container my-16">
+    <div className="container my-32">
       <header className="max-w-3xl">
         <h6 className="text-xs font-bold uppercase tracking-[0.2em] text-[#17a2bc]">
           {eyebrow?.trim() || 'Powerful tools'}
@@ -50,12 +50,10 @@ export const PowerfulToolsBlock: React.FC<PowerfulToolsBlockProps> = (props) => 
                 </span>
               ) : null}
             </div>
-            <h3 className="mt-5 text-lg font-bold leading-snug text-[#1a1b39] md:text-xl">
+            <h3 className="mt-5 text-2xl font-bold leading-snug text-[#1a1b39] md:text-xl">
               {row.title}
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600 md:text-[15px] md:leading-7">
-              {row.description}
-            </p>
+            <p className="mt-2 text-lg text-[#525475] ">{row.description}</p>
           </li>
         ))}
       </ul>

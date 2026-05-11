@@ -1,12 +1,12 @@
 import type { Block } from 'payload'
 
-import { sectionSurfaceField } from '@/fields/sectionSurface'
+import { sectionFields } from '@/fields/sectionSurface'
 
 export const MediaBlock: Block = {
   slug: 'mediaBlock',
   interfaceName: 'MediaBlock',
   fields: [
-    sectionSurfaceField,
+    ...sectionFields,
     {
       name: 'media',
       type: 'upload',

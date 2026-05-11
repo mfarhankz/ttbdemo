@@ -42,8 +42,17 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
+              const sectionId =
+                'sectionId' in block && typeof block.sectionId === 'string'
+                  ? block.sectionId.trim()
+                  : ''
+
               return (
-                <section className={sectionSurfaceClassName(block.sectionSurface)} key={index}>
+                <section
+                  className={sectionSurfaceClassName(block.sectionSurface)}
+                  id={sectionId || undefined}
+                  key={index}
+                >
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </section>

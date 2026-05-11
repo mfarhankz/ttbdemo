@@ -1,6 +1,6 @@
 import type { Block } from 'payload'
 
-import { sectionSurfaceField } from '@/fields/sectionSurface'
+import { sectionFields } from '@/fields/sectionSurface'
 
 export const PowerfulTools: Block = {
   slug: 'powerfulTools',
@@ -10,7 +10,7 @@ export const PowerfulTools: Block = {
     plural: 'Powerful tools',
   },
   fields: [
-    sectionSurfaceField,
+    ...sectionFields,
     {
       name: 'eyebrow',
       type: 'text',
