@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 
 import type { Page } from '@/payload-types'
 
+import { ProptechBackgroundSection } from '@/components/ProptechBackgroundSection'
 import { sectionSurfaceClassName } from '@/fields/sectionSurface'
 import { AccordionBlock } from '@/blocks/AccordionBlock/Component'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
@@ -47,9 +48,25 @@ export const RenderBlocks: React.FC<{
                   ? block.sectionId.trim()
                   : ''
 
+              const surfaceClass = sectionSurfaceClassName(block.sectionSurface)
+              const isProptech = block.sectionSurface === 'proptech-background'
+
+              if (isProptech) {
+                return (
+                  <ProptechBackgroundSection
+                    className={surfaceClass}
+                    id={sectionId || undefined}
+                    key={index}
+                  >
+                    {/* @ts-expect-error there may be some mismatch between the expected types here */}
+                    <Block {...block} disableInnerContainer />
+                  </ProptechBackgroundSection>
+                )
+              }
+
               return (
                 <section
-                  className={sectionSurfaceClassName(block.sectionSurface)}
+                  className={surfaceClass}
                   id={sectionId || undefined}
                   key={index}
                 >

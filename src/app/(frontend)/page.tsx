@@ -1,3 +1,1 @@
-import { HomePage } from '@/components/home/HomePage'
-
-export default HomePage
+export { default, generateMetadata } from './[slug]/page'

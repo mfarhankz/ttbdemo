@@ -15,6 +15,8 @@ export type FormBlockType = {
   blockName?: string
   blockType?: 'formBlock'
   enableIntro: boolean
+  eyebrow?: string | null
+  heading?: string | null
   form: FormType
   introContent?: DefaultTypedEditorState
 }
@@ -26,6 +28,8 @@ export const FormBlock: React.FC<
 > = (props) => {
   const {
     enableIntro,
+    eyebrow,
+    heading,
     form: formFromProps,
     form: { id: formID, confirmationMessage, confirmationType, redirect, submitButtonLabel } = {},
     introContent,
@@ -113,50 +117,86 @@ export const FormBlock: React.FC<
     [router, formID, redirect, confirmationType],
   )
 
-  return (
-    <div className="container lg:max-w-[48rem]">
-      {enableIntro && introContent && !hasSubmitted && (
-        <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
-      )}
-      <div className="p-4 lg:p-6 border border-border rounded-[0.8rem]">
-        <FormProvider {...formMethods}>
-          {!isLoading && hasSubmitted && confirmationType === 'message' && (
-            <RichText data={confirmationMessage} />
-          )}
-          {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-          {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
-          {!hasSubmitted && (
-            <form id={formID} onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-4 last:mb-0">
-                {formFromProps &&
-                  formFromProps.fields &&
-                  formFromProps.fields?.map((field, index) => {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields]
-                    if (Field) {
-                      return (
-                        <div className="mb-6 last:mb-0" key={index}>
-                          <Field
-                            form={formFromProps}
-                            {...field}
-                            {...formMethods}
-                            control={control}
-                            errors={errors}
-                            register={register}
-                          />
-                        </div>
-                      )
-                    }
-                    return null
-                  })}
-              </div>
+  const trimmedEyebrow = eyebrow?.trim() || ''
+  const trimmedHeading = heading?.trim() || ''
+  const hasIntroContent = Boolean(enableIntro && introContent)
+  const hasLeftColumn = Boolean(trimmedEyebrow || trimmedHeading || hasIntroContent)
 
+  const formCard = (
+    <div className="rounded-md bg-[#fffffff2] p-6 text-[#0f172a] shadow-[0_18px_40px_-18px_rgba(15,23,42,0.45)] md:p-8">
+      <FormProvider {...formMethods}>
+        {!isLoading && hasSubmitted && confirmationType === 'message' && (
+          <RichText data={confirmationMessage} />
+        )}
+        {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
+        {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+        {!hasSubmitted && (
+          <form id={formID} onSubmit={handleSubmit(onSubmit)}>
+            {trimmedHeading && !hasSubmitted ? (
+              <h2 className="mt-3 text-4xl text-[#292669]">{trimmedHeading}</h2>
+            ) : null}
+            <div className="mb-4 last:mb-0">
+              {formFromProps &&
+                formFromProps.fields &&
+                formFromProps.fields?.map((field, index) => {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields]
+                  if (Field) {
+                    return (
+                      <div className="mb-6 last:mb-0" key={index}>
+                        <Field
+                          form={formFromProps}
+                          {...field}
+                          {...formMethods}
+                          control={control}
+                          errors={errors}
+                          register={register}
+                        />
+                      </div>
+                    )
+                  }
+                  return null
+                })}
+            </div>
+
+            <div className="flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 pt-4">
+              <Button onClick={() => formMethods.reset()} type="reset" variant="outline">
+                Reset
+              </Button>
               <Button form={formID} type="submit" variant="default">
                 {submitButtonLabel}
               </Button>
-            </form>
-          )}
-        </FormProvider>
+            </div>
+          </form>
+        )}
+      </FormProvider>
+    </div>
+  )
+
+  if (!hasLeftColumn) {
+    return <div className="container lg:max-w-3xl">{formCard}</div>
+  }
+
+  return (
+    <div className="container flex min-h-[calc(100dvh-80px)] items-center py-12 md:py-16">
+      <div className="grid w-full gap-10 md:grid-cols-[1fr_1.1fr] md:items-center md:gap-12 lg:gap-16">
+        <div className="text-white">
+          {trimmedEyebrow && !hasSubmitted ? (
+            <h6 className="text-xs font-bold uppercase tracking-[0.2em] text-[#00b8db]">
+              {trimmedEyebrow}
+            </h6>
+          ) : null}
+
+          {enableIntro && introContent && !hasSubmitted ? (
+            <RichText
+              className="mt-4 text-white [&_h1]:text-white [&_h2]:text-white [&_h3]:text-white [&_h4]:text-white [&_p]:text-white/85 [&_a]:text-white [&_strong]:text-white"
+              data={introContent}
+              enableGutter={false}
+            />
+          ) : null}
+        </div>
+
+        {formCard}
       </div>
     </div>
   )

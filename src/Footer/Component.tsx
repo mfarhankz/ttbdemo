@@ -48,9 +48,7 @@ export async function Footer() {
             ))}
           </nav>
         ) : null}
-        <p className="mx-auto max-w-4xl text-center font-serif text-sm leading-relaxed font-light text-slate-600">
-          {disclaimer}
-        </p>
+        <p className="text-center">{disclaimer}</p>
       </div>
     </footer>
   )

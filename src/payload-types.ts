@@ -456,7 +456,7 @@ export interface User {
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
-  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  sectionSurface?: ('texture' | 'gradient' | 'proptech-background' | 'none') | null;
   /**
    * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
    */
@@ -509,7 +509,7 @@ export interface CallToActionBlock {
  * via the `definition` "ContentBlock".
  */
 export interface ContentBlock {
-  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  sectionSurface?: ('texture' | 'gradient' | 'proptech-background' | 'none') | null;
   /**
    * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
    */
@@ -564,7 +564,7 @@ export interface ContentBlock {
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
-  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  sectionSurface?: ('texture' | 'gradient' | 'proptech-background' | 'none') | null;
   /**
    * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
    */
@@ -579,7 +579,7 @@ export interface MediaBlock {
  * via the `definition` "ArchiveBlock".
  */
 export interface ArchiveBlock {
-  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  sectionSurface?: ('texture' | 'gradient' | 'proptech-background' | 'none') | null;
   /**
    * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
    */
@@ -618,11 +618,13 @@ export interface ArchiveBlock {
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
-  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  sectionSurface?: ('texture' | 'gradient' | 'proptech-background' | 'none') | null;
   /**
    * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
    */
   sectionId?: string | null;
+  eyebrow?: string | null;
+  heading?: string | null;
   form: number | Form;
   enableIntro?: boolean | null;
   introContent?: {
@@ -823,7 +825,7 @@ export interface Form {
  * via the `definition` "AccordionBlock".
  */
 export interface AccordionBlock {
-  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  sectionSurface?: ('texture' | 'gradient' | 'proptech-background' | 'none') | null;
   /**
    * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
    */
@@ -847,7 +849,7 @@ export interface AccordionBlock {
  * via the `definition` "FeatureGridBlock".
  */
 export interface FeatureGridBlock {
-  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  sectionSurface?: ('texture' | 'gradient' | 'proptech-background' | 'none') | null;
   /**
    * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
    */
@@ -870,7 +872,7 @@ export interface FeatureGridBlock {
  * via the `definition` "PowerfulToolsBlock".
  */
 export interface PowerfulToolsBlock {
-  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  sectionSurface?: ('texture' | 'gradient' | 'proptech-background' | 'none') | null;
   /**
    * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
    */
@@ -895,7 +897,7 @@ export interface PowerfulToolsBlock {
  * via the `definition` "ProcessStepsBlock".
  */
 export interface ProcessStepsBlock {
-  sectionSurface?: ('texture' | 'gradient' | 'none') | null;
+  sectionSurface?: ('texture' | 'gradient' | 'proptech-background' | 'none') | null;
   /**
    * Optional. Rendered as id="..." on the <section> tag so nav links can scroll to it (e.g. "features").
    */
@@ -1330,6 +1332,8 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
 export interface FormBlockSelect<T extends boolean = true> {
   sectionSurface?: T;
   sectionId?: T;
+  eyebrow?: T;
+  heading?: T;
   form?: T;
   enableIntro?: T;
   introContent?: T;

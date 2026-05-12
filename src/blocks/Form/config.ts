@@ -15,6 +15,16 @@ export const FormBlock: Block = {
   fields: [
     ...sectionFields,
     {
+      name: 'eyebrow',
+      type: 'text',
+      label: 'Eyebrow',
+    },
+    {
+      name: 'heading',
+      type: 'text',
+      label: 'Heading',
+    },
+    {
       name: 'form',
       type: 'relationship',
       relationTo: 'forms',

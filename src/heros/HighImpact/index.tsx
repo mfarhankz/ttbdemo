@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 
 import type { Page } from '@/payload-types'
 
+import { handleProptechPointerMove } from '@/components/ProptechBackgroundSection'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
@@ -18,20 +19,11 @@ export const HighImpactHero: React.FC<Page['hero']> = (props) => {
     setHeaderTheme('dark')
   }, [setHeaderTheme])
 
-  const handlePointerMove: React.PointerEventHandler<HTMLElement> = (event) => {
-    const bounds = event.currentTarget.getBoundingClientRect()
-    const x = event.clientX - bounds.left
-    const y = event.clientY - bounds.top
-
-    event.currentTarget.style.setProperty('--mouse-x', `${x}px`)
-    event.currentTarget.style.setProperty('--mouse-y', `${y}px`)
-  }
-
   return (
     <section
-      className="proptech-background relative overflow-hidden py-36 md:py-[150px] mt-[65px]"
+      className="proptech-background relative overflow-hidden py-36 md:pt-[250px] md:pb-[200px]"
       data-theme="dark"
-      onPointerMove={handlePointerMove}
+      onPointerMove={handleProptechPointerMove}
     >
       <div className="container">
         <div className="grid gap-10 md:grid-cols-2 md:items-center">

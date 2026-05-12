@@ -8,6 +8,7 @@ export const sectionSurfaceField: Field = {
   options: [
     { label: 'Texture', value: 'texture' },
     { label: 'Gradient', value: 'gradient' },
+    { label: 'Hero Background', value: 'proptech-background' },
     { label: 'None', value: 'none' },
   ],
 }
@@ -25,7 +26,7 @@ export const sectionIdField: Field = {
 
 export const sectionFields: Field[] = [sectionSurfaceField, sectionIdField]
 
-export type SectionSurface = 'texture' | 'gradient' | 'none'
+export type SectionSurface = 'texture' | 'gradient' | 'proptech-background' | 'none'
 
 export function sectionSurfaceClassName(surface: SectionSurface | null | undefined): string {
   switch (surface) {
@@ -33,6 +34,8 @@ export function sectionSurfaceClassName(surface: SectionSurface | null | undefin
       return 'paper-texture'
     case 'gradient':
       return 'bg-paper-gradient'
+    case 'proptech-background':
+      return 'proptech-background'
     case 'none':
     default:
       return 'bg-paper-gradient'
