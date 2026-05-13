@@ -25,7 +25,12 @@ import { getServerSideURL } from '@/utilities/getURL'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={cn(spaceGrotesk.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
+    <html
+      className={cn(spaceGrotesk.variable, GeistMono.variable)}
+      data-scroll-behavior="smooth"
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

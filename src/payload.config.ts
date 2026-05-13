@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
@@ -17,6 +18,39 @@ import { getServerSideURL } from './utilities/getURL'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const smtpHost = process.env.SMTP_HOST
+const smtpUser = process.env.SMTP_USER
+const smtpPass = process.env.SMTP_PASS
+const defaultFromAddress =
+  process.env.EMAIL_FROM_ADDRESS || 'no-reply@titletoolbox.local'
+const defaultFromName = process.env.EMAIL_FROM_NAME || 'Title Toolbox'
+
+const email = nodemailerAdapter({
+  defaultFromAddress,
+  defaultFromName,
+  // If SMTP env vars are set, deliver via SMTP. Otherwise, use a stream transport
+  // that silently buffers messages so Payload doesn't print the "No email adapter
+  // provided" warning during dev/build.
+  transportOptions: smtpHost
+    ? {
+        host: smtpHost,
+        port: Number(process.env.SMTP_PORT || 587),
+        secure: process.env.SMTP_SECURE === 'true',
+        auth:
+          smtpUser && smtpPass
+            ? {
+                user: smtpUser,
+                pass: smtpPass,
+              }
+            : undefined,
+      }
+    : {
+        streamTransport: true,
+        newline: 'unix',
+        buffer: true,
+      },
+})
 
 export default buildConfig({
   admin: {
@@ -66,6 +100,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
+  email,
   globals: [Header, Footer],
   plugins,
   secret: process.env.PAYLOAD_SECRET,

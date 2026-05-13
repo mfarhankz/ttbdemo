@@ -85,7 +85,14 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         .join(', ')
 
   return (
-    <picture className={cn(pictureClassName)}>
+    <picture
+      className={cn(
+        // next/image `fill` needs its *direct* parent positioned. <picture> is the direct
+        // parent of <img>, so make it relative whenever `fill` is set.
+        fill && 'relative block h-full w-full',
+        pictureClassName,
+      )}
+    >
       <NextImage
         alt={alt || ''}
         className={cn(imgClassName)}
