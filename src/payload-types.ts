@@ -653,6 +653,10 @@ export interface FormBlock {
 export interface Form {
   id: number;
   title: string;
+  /**
+   * Shown under the form title in the Request a Demo modal. Leave empty to use the default line.
+   */
+  introMessage?: string | null;
   fields?:
     | (
         | {
@@ -1609,6 +1613,7 @@ export interface RedirectsSelect<T extends boolean = true> {
  */
 export interface FormsSelect<T extends boolean = true> {
   title?: T;
+  introMessage?: T;
   fields?:
     | T
     | {

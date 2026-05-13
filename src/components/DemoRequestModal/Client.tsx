@@ -1,26 +1,31 @@
 'use client'
 
-import type { FormFieldBlock, Form as FormType } from '@payloadcms/plugin-form-builder/types'
+import type { FormFieldBlock, Form as PluginForm } from '@payloadcms/plugin-form-builder/types'
+import type { Form } from '@/payload-types'
 
 import { useRouter } from 'next/navigation'
 import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import RichText from '@/components/RichText'
-import { Button } from '@/components/ui/button'
 import { fields } from '@/blocks/Form/fields'
 import { getClientSideURL } from '@/utilities/getURL'
 
+const DEFAULT_MODAL_INTRO =
+  'Fill out the form and a Title Toolbox representative will follow up with you.'
+
 type Props = {
-  form: FormType | null
+  form: Form | null
 }
 
 export const DemoRequestModalClient: React.FC<Props> = ({ form }) => {
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
 
+  const formForBuilder = form as unknown as PluginForm | null
+
   const formMethods = useForm({
-    defaultValues: form?.fields,
+    defaultValues: formForBuilder?.fields,
   })
   const {
     control,
@@ -127,6 +132,9 @@ export const DemoRequestModalClient: React.FC<Props> = ({ form }) => {
 
   if (!isOpen) return null
 
+  const introMessage = form?.introMessage?.trim() ?? ''
+  const modalIntroText = introMessage || DEFAULT_MODAL_INTRO
+
   return (
     <div
       aria-modal="true"
@@ -139,31 +147,37 @@ export const DemoRequestModalClient: React.FC<Props> = ({ form }) => {
       <div className="max-h-[90vh] w-[600px] overflow-y-auto rounded-2xl bg-[#ffffff] p-8 shadow-card">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-[#272163] md:text-3xl">
-              {form?.title || 'Request a Demo'}
-            </h2>
-            <p className="max-w-3xl text-lg text-[#4b4f68]">
-              Fill out the form and a Title Toolbox representative will follow up with you.
-            </p>
+            {!hasSubmitted ? (
+              <>
+                <h2 className="text-3xl font-semibold tracking-tight text-[#272163] md:text-3xl">
+                  {form?.title || 'Request a Demo'}
+                </h2>
+                <p className="mb-4 max-w-3xl whitespace-pre-line text-lg text-[#4b4f68]">
+                  {modalIntroText}
+                </p>
+              </>
+            ) : null}
           </div>
-          <button
-            aria-label="Close modal"
-            className="text-3xl leading-none text-[#6a6f84] transition hover:text-[#272163]"
-            onClick={close}
-            type="button"
-          >
-            ×
-          </button>
+          {!hasSubmitted ? (
+            <button
+              aria-label="Close modal"
+              className="text-3xl leading-none text-[#6a6f84] transition hover:text-[#272163]"
+              onClick={close}
+              type="button"
+            >
+              ×
+            </button>
+          ) : null}
         </div>
 
-        <div className="mt-8">
+        <div>
           {!form ? (
             <p className="text-base text-[#4b4f68]">
               The &ldquo;Request a Demo&rdquo; form has not been configured in the admin yet.
             </p>
           ) : (
             <FormProvider {...formMethods}>
-              {hasSubmitted && form.confirmationType === 'message' ? (
+              {hasSubmitted && form.confirmationType === 'message' && form.confirmationMessage ? (
                 <RichText data={form.confirmationMessage} />
               ) : null}
 
@@ -181,7 +195,7 @@ export const DemoRequestModalClient: React.FC<Props> = ({ form }) => {
                 <form
                   className="demo-modal-form space-y-5"
                   id={`demo-form-${form.id}`}
-                  onSubmit={handleSubmit(onSubmit)}
+                  onSubmit={handleSubmit((data) => onSubmit(data as unknown as FormFieldBlock[]))}
                 >
                   {form.fields?.map((field, index) => {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -190,7 +204,7 @@ export const DemoRequestModalClient: React.FC<Props> = ({ form }) => {
                     return (
                       <div key={index}>
                         <Field
-                          form={form}
+                          form={formForBuilder!}
                           {...field}
                           {...formMethods}
                           control={control}

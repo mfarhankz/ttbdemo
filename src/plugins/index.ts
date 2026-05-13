@@ -3,6 +3,7 @@ import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
+import type { Field } from 'payload'
 import { Plugin } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
@@ -60,7 +61,7 @@ export const plugins: Plugin[] = [
     },
     formOverrides: {
       fields: ({ defaultFields }) => {
-        return defaultFields.map((field) => {
+        const mapped = defaultFields.map((field) => {
           if ('name' in field && field.name === 'confirmationMessage') {
             return {
               ...field,
@@ -77,6 +78,27 @@ export const plugins: Plugin[] = [
           }
           return field
         })
+
+        const introMessageField: Field = {
+          name: 'introMessage',
+          type: 'textarea',
+          label: 'Modal intro message (optional)',
+          admin: {
+            description:
+              'Shown under the form title in the Request a Demo modal. Leave empty to use the default line.',
+            rows: 3,
+          },
+        }
+
+        const titleIndex = mapped.findIndex(
+          (field) => 'name' in field && field.name === 'title',
+        )
+
+        if (titleIndex === -1) {
+          return [introMessageField, ...mapped]
+        }
+
+        return [...mapped.slice(0, titleIndex + 1), introMessageField, ...mapped.slice(titleIndex + 1)]
       },
     },
   }),

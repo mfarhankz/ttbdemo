@@ -1,4 +1,4 @@
-import type { Form as FormType } from '@payloadcms/plugin-form-builder/types'
+import type { Form } from '@/payload-types'
 
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
@@ -8,7 +8,7 @@ import { DemoRequestModalClient } from './Client'
 
 const DEMO_FORM_TITLE = 'Request a Demo'
 
-async function getDemoForm(): Promise<FormType | null> {
+async function getDemoForm(): Promise<Form | null> {
   try {
     const payload = await getPayload({ config: configPromise })
     const result = await payload.find({
@@ -20,7 +20,7 @@ async function getDemoForm(): Promise<FormType | null> {
         title: { equals: DEMO_FORM_TITLE },
       },
     })
-    return (result.docs?.[0] as unknown as FormType) ?? null
+    return result.docs?.[0] ?? null
   } catch (err) {
     console.warn('[DemoRequestModal] Failed to load form:', err)
     return null
