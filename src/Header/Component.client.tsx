@@ -65,17 +65,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ headerData }) => {
 
   return (
     <header
-      className={
-        isHome
-          ? 'fixed inset-x-0 top-0 z-50   text-white shadow-[0_8px_24px_rgba(15,23,42,0.25)]'
-          : 'relative z-20 text-white'
-      }
+      className={isHome ? 'fixed inset-x-0 top-0 z-50 text-white ' : 'relative z-20 text-white'}
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <div
         className={
           isHome
-            ? 'container flex justify-between py-5 bg-[#292669f2] border-b border-white/15'
+            ? 'container flex justify-between py-5 bg-[#292669f2] border-b border-white/15 shadow-[0_8px_24px_rgba(15,23,42,0.25)]'
             : 'container py-5 flex justify-between'
         }
       >

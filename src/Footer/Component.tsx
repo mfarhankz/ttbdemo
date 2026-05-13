@@ -26,7 +26,7 @@ export async function Footer() {
             <h6 className="mb-3 text-xs font-bold uppercase tracking-wide text-[#00b8db]">
               {ctaEyebrow}
             </h6>
-            <h2 className="text-2xl font-semibold leading-snug md:text-3xl md:leading-tight">
+            <h2 className="text-2xl font-semibold leading-snug md:text-3xl md:leading-tight mb-0!">
               {ctaHeadline}
             </h2>
           </div>

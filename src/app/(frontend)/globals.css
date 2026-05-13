@@ -61,6 +61,18 @@
   }
 }
 
+.hover\:shadow-elevated:hover {
+  box-shadow: var(--shadow-elevated);
+}
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+input {
+  height: 50px;
+  background-color: #f8fafc;
+}
+
 @plugin "@tailwindcss/typography";
 
 @source inline("lg:col-span-4");

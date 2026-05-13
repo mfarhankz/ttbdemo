@@ -13,8 +13,8 @@ export const AccordionBlock: React.FC<AccordionBlockProps> = (props) => {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <div className="container my-16">
-      <div className="grid gap-10 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] md:items-start md:gap-12 lg:gap-16">
+    <div className="container my-32">
+      <div className="grid gap-10 md:grid-cols-[minmax(0,0.68fr)_minmax(0,1.15fr)] md:items-start md:gap-12 lg:gap-16">
         <div>
           <h6 className="text-xs font-bold uppercase tracking-[0.2em] text-[#00b8db]">
             {eyebrow?.trim() || 'FAQ'}
@@ -22,24 +22,22 @@ export const AccordionBlock: React.FC<AccordionBlockProps> = (props) => {
           <h1 className="mt-3 text-3xl font-semibold leading-tight tracking-tight text-[#1a1b3a] md:text-[2rem] md:leading-snug">
             {heading}
           </h1>
-          {intro ? (
-            <p className="mt-4 max-w-md text-lg leading-relaxed text-[#525475]">{intro}</p>
-          ) : null}
+          {intro ? <p className="mt-4 max-w-md text-lg leading-relaxed">{intro}</p> : null}
         </div>
 
-        <div className="rounded-xl border border-slate-200/80 bg-white p-1 shadow-[0_12px_40px_-12px_rgba(15,23,42,0.12)]">
-          <ul className="divide-y divide-slate-200/90">
+        <div className="rounded-xl border border-[#c6cddd] bg-white p-4 shadow-card">
+          <ul className="divide-y divide-[#c6cddd">
             {list.map((row, index) => {
               const isOpen = openIndex === index
               return (
-                <li className="px-4 py-0 md:px-5" key={row.id ?? `${index}-${row.question}`}>
+                <li className="px-4 py-0" key={row.id ?? `${index}-${row.question}`}>
                   <button
                     aria-expanded={isOpen}
                     className="flex w-full items-start justify-between gap-4 py-4 text-left md:py-5"
                     onClick={() => setOpenIndex(isOpen ? -1 : index)}
                     type="button"
                   >
-                    <span className="text-[15px] font-semibold leading-snug text-[#1a1b3a] md:text-base">
+                    <span className="text-lg font-semibold leading-snug text-[#292669] hover:underline cursor-pointer">
                       {row.question}
                     </span>
                     <ChevronDown
@@ -58,7 +56,7 @@ export const AccordionBlock: React.FC<AccordionBlockProps> = (props) => {
                     )}
                   >
                     <div className="min-h-0 overflow-hidden">
-                      <p className="pb-4 pr-2 text-lg leading-relaxed text-[#525475] md:pb-5 md:leading-7">
+                      <p className="pb-4 pr-2 text-lg leading-relaxed md:pb-5 md:leading-7">
                         {row.answer}
                       </p>
                     </div>
